@@ -1,0 +1,27 @@
+{
+  "name": "fintrust_bank",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000F\u0000i\u0000n\u0000T\u0000r\u0000u\u0000s\u0000t\u0000_\u0000B\u0000a\u0000n\u0000k\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon api/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fimaAidarous/FinTrust_Bank.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fimaAidarous/FinTrust_Bank/issues"
+  },
+  "homepage": "https://github.com/fimaAidarous/FinTrust_Bank#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.11.0"
+  }
+}
