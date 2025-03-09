@@ -14,3 +14,12 @@ export const createAccount = async (req,res,next) => {
         next(error);
     }
 };
+
+export const getAllAccounts = async (req, res, next) => {
+    try {
+      const accounts = await Account.find().populate("user_id", "email");
+      res.status(200).json(accounts);
+    } catch (error) {
+      next(error);
+    }
+  };
