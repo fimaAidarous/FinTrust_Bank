@@ -1,6 +1,6 @@
 import express from 'express';
 import { createAccount,getAllAccounts,
-    updateAccount,getAccount
+    updateAccount,getAccount,deleteAccount
  } 
 from "../controllers/accountController.js";
 
@@ -10,5 +10,6 @@ router.post('/createAccount', createAccount);
 router.get('/', getAllAccounts);
 router.put("/:id", updateAccount);
 router.get("/:id", getAccount);
+router.delete("/:id", deleteAccount);
 
 export default router;

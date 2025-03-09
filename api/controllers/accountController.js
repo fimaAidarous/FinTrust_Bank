@@ -47,3 +47,13 @@ export const getAccount = async (req, res, next) => {
       next(error);
     }
 };
+
+export const deleteAccount = async (req, res, next) => {
+    try {
+      const deletedAccount = await Account.findByIdAndDelete(req.params.id);
+      if (!deletedAccount) return next(errorHandler(404, "Account not found!"));
+      res.status(200).json("Account deleted successfully!");
+    } catch (error) {
+      next(error);
+    }
+};
