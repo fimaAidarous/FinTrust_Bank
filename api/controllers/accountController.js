@@ -22,4 +22,18 @@ export const getAllAccounts = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
+};
+
+export const updateAccount = async (req, res, next) => {
+    try {
+      const updatedAccount = await Account.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true }
+      );
+      if (!updatedAccount) return next(errorHandler(404, "Account not found!"));
+      res.status(200).json(updatedAccount);
+    } catch (error) {
+      next(error);
+    }
   };
