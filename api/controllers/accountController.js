@@ -36,4 +36,14 @@ export const updateAccount = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  };
+};
+
+export const getAccount = async (req, res, next) => {
+    try {
+      const account = await Account.findById(req.params.id).populate("user_id", "email");
+      if (!account) return next(errorHandler(404, "Account not found!"));
+      res.status(200).json(account);
+    } catch (error) {
+      next(error);
+    }
+};
