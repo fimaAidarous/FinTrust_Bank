@@ -2,20 +2,27 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors";  
 import userRouter from './routes/userRouter.js';
 import authRouter from './routes/authRoute.js';
 
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI)
- .then(() => {
-    console.log('Connected to MONGODB');
- })
+  .then(() => {
+     console.log('Connected to MONGODB');
+  })
   .catch((err) => {
-    console.log(err);
+     console.log(err);
   });
 
 const app = express();
+
+
+app.use(cors({
+  origin: "http://localhost:5173",  
+  credentials: true,  
+}));
 
 app.use(express.json());
 
@@ -28,10 +35,10 @@ app.listen(3000, () => {
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 
-app.use(( err, req, res, next) => {
+app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || "internal Server Error";
-    return res.status(statusCode).json ({
+    return res.status(statusCode).json({
         success: false,
         statusCode,
         message,

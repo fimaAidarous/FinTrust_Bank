@@ -1,0 +1,46 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px; 
+  background: linear-gradient(90deg, #c56961, #470d12);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; 
+}
+
+.header-logo img {
+  height: 80px;
+  width: auto;
+}
+
+.header-menu a {
+  margin: 0 20px;
+  text-decoration: none;
+  color: #fff; 
+  font-size: 16px;
+}
+
+.header-menu a:hover {
+  text-decoration: underline;
+}
+
+.header-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.icon {
+  color: #fff; 
+  transition: color 0.3s ease;
+}
+
+.icon:hover {
+  color: #ffd700;
+}
+
+body {
+  padding-top: 70px; 
+}

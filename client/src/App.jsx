@@ -1,9 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"; 
+import Login from './pages/Login';  
+import Dashboard from './pages/Dashboard';  
+import Header from "./components/Header";
 
-function App() {
+
+export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <div>App</div>
-  )
+    <BrowserRouter>
+      {isLoggedIn && <Header />} 
+      <Routes>
+        {!isLoggedIn ? (
+          <Route path="*" element={<Login />} />
+        ) : (
+          <>
+            <Route path="/login" element={<Navigate to="/" />} />
+          </>
+        )}
+           <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+  
+    </BrowserRouter>
+  );
 }
-
-export default App
