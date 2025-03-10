@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"; 
 import Login from './pages/Login';  
 import Dashboard from './pages/Dashboard';  
-import Header from "./components/Header";
+import Header from "./pages/Header";
 
 
 export default function App() {
