@@ -56,7 +56,7 @@ const CreateAccount = () => {
         dispatch(createAccountSuccess(data));
         setSuccessMessage('Account created successfully!');
         setSnackbarOpen(true);
-        setTimeout(() => navigate('/accounts'), 2000); // Navigate after showing success message
+        setTimeout(() => navigate('/accounts'), 2000); 
       } else {
         throw new Error(data.message || 'Failed to create account.');
       }
