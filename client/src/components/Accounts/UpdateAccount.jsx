@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { 
-  createAccountStart, 
-  createAccountSuccess, 
-  createAccountFailure 
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { updateAccountStart, 
+    updateAccountSuccess,
+     updateAccountFailure
 } from '../../redux/accountSlice';
-import { 
-  Container, Paper, Typography, TextField, MenuItem, Button, Snackbar, Alert, CircularProgress
+import { Container, Paper, Typography, 
+    TextField, MenuItem, 
+    Button, CircularProgress,
+     Snackbar, Alert 
 } from '@mui/material';
 
 const accountTypes = ['savings', 'checking'];
 const accountStatuses = ['active', 'inactive'];
 
-const CreateAccount = () => {
+const UpdateAccount = () => {
+  const { accountId } = useParams(); 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { accounts, loading, error } = useSelector((state) => state.account);
+  const account = accounts.find(acc => acc._id === accountId);
+  if (!account) {
+    return <CircularProgress />;
+  }
 
   const [formData, setFormData] = useState({
     account_number: '',
@@ -26,47 +33,49 @@ const CreateAccount = () => {
     status: 'active',
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
+  useEffect(() => {
+    if (account) {
+      setFormData({
+        account_number: account.account_number,
+        user_id: account.user_id._id || account.user_id, 
+        account_type: account.account_type,
+        balance: account.balance,
+        currency: account.currency,
+        status: account.status,
+      });
+    }
+  }, [account]); 
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setLoading(true);
-    dispatch(createAccountStart());
-
+    dispatch(updateAccountStart());
     try {
-      const response = await fetch('http://localhost:3000/api/accounts', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json' 
-        },
+      const response = await fetch(`http://localhost:3000/api/accounts/${accountId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
       
       if (response.ok) {
-        dispatch(createAccountSuccess(data));
-        setSuccessMessage('Account created successfully!');
+        dispatch(updateAccountSuccess(data));
+        setSuccessMessage('Account updated successfully!');
         setSnackbarOpen(true);
-        setTimeout(() => navigate('/accounts'), 2000); // Navigate after showing success message
+        setTimeout(() => navigate('/accounts'), 2000); 
       } else {
-        throw new Error(data.message || 'Failed to create account.');
+        throw new Error(data.message || 'Failed to update account.');
       }
     } catch (err) {
-      setError(err.message);
-      setSnackbarOpen(true);
-      dispatch(createAccountFailure(err.message));
+      dispatch(updateAccountFailure(err.message));
     }
-    
-    setLoading(false);
   };
 
   const handleCloseSnackbar = () => {
@@ -75,9 +84,9 @@ const CreateAccount = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Paper elevation={6} sx={{ padding: '20px', borderRadius: '16px', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)' }}>
+      <Paper elevation={6} sx={{ padding: '20px', borderRadius: '16px' }}>
         <Typography variant="h5" align="center" gutterBottom>
-          🏦 Create Account
+        ✨  Update Account
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -160,12 +169,12 @@ const CreateAccount = () => {
             disabled={loading}
             sx={{ marginTop: '16px' }}
           >
-            {loading ? <CircularProgress size={24} /> : 'Create Account'}
+            {loading ? <CircularProgress size={24} /> : 'Update Account'}
           </Button>
         </form>
         <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-          <Alert onClose={handleCloseSnackbar} severity={error ? 'error' : 'success'} sx={{ width: '100%' }}>
-            {error ? error : successMessage}
+          <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+            {successMessage}
           </Alert>
         </Snackbar>
       </Paper>
@@ -173,4 +182,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default UpdateAccount;

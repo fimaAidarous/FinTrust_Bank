@@ -82,7 +82,7 @@ const Login = () => {
           }}
         >
           <Typography variant="h5" align="center" gutterBottom>
-            Login Bank Account
+          🔑 Login Bank Account
           </Typography>
           <form onSubmit={handleSubmit}>
             <TextField
@@ -118,12 +118,12 @@ const Login = () => {
             <Button
               type="submit"
               variant="contained"
-              color="primary"
+              color="success"
               fullWidth
               disabled={loading} 
               sx={{
                 marginTop: "20px",
-                boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.2)",
+                boxShadow: "0px 4px 30px rgba(124, 24, 24, 0.2)",
                 "&:hover": {
                   boxShadow: "0px 6px 30px rgba(0, 0, 0, 0.3)",
                 },

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  accounts: null,
+  accounts: [],
   error: null,
   loading: false,
 };
@@ -14,7 +14,7 @@ const accountSlice = createSlice({
       state.loading = true;
     },
     createAccountSuccess: (state, action) => {
-      state.account = action.payload;
+      state.accounts.push(action.payload);
       state.loading = false;
       state.error = null;
     },
@@ -23,11 +23,17 @@ const accountSlice = createSlice({
       state.loading = false;
     },
 
+    
     updateAccountStart: (state) => {
       state.loading = true;
     },
     updateAccountSuccess: (state, action) => {
-      state.account = { ...state.account, ...action.payload };
+      const index = state.accounts.findIndex(
+        (account) => account._id === action.payload._id
+      );
+      if (index !== -1) {
+        state.accounts[index] = action.payload;
+      }
       state.loading = false;
       state.error = null;
     },
@@ -36,11 +42,14 @@ const accountSlice = createSlice({
       state.loading = false;
     },
 
+
     deleteAccountStart: (state) => {
       state.loading = true;
     },
-    deleteAccountSuccess: (state) => {
-      state.account = null;
+    deleteAccountSuccess: (state, action) => {
+      state.accounts = state.accounts.filter(
+        (account) => account._id !== action.payload
+      );
       state.loading = false;
       state.error = null;
     },
@@ -48,8 +57,53 @@ const accountSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+
+
+    accountListStart: (state) => {
+      state.loading = true;
+    },
+    accountListSuccess: (state, action) => {
+      state.accounts = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
+    accountListFailure: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
   },
 });
+
+export const fetchAccounts = () => async (dispatch) => {
+  dispatch(accountListStart());
+  try {
+    const response = await fetch("http://localhost:3000/api/accounts");
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to fetch accounts");
+    }
+    dispatch(accountListSuccess(data));
+  } catch (error) {
+    dispatch(accountListFailure(error.message));
+  }
+};
+
+export const deleteAccount = (accountId) => async (dispatch) => {
+  dispatch(deleteAccountStart());
+  try {
+    const response = await fetch(`http://localhost:3000/api/accounts/${accountId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to delete account');
+    }
+
+    dispatch(deleteAccountSuccess(accountId));
+  } catch (error) {
+    dispatch(deleteAccountFailure(error.message));
+  }
+};
 
 export const {
   createAccountStart,
@@ -61,6 +115,9 @@ export const {
   deleteAccountStart,
   deleteAccountSuccess,
   deleteAccountFailure,
+  accountListStart,
+  accountListSuccess,
+  accountListFailure,
 } = accountSlice.actions;
 
 export default accountSlice.reducer;

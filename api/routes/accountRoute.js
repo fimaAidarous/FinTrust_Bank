@@ -6,7 +6,7 @@ from "../controllers/accountController.js";
 
 const router = express.Router();
 
-router.post('/createAccount', createAccount);
+router.post('/', createAccount);
 router.get('/', getAllAccounts);
 router.put("/:id", updateAccount);
 router.get("/:id", getAccount);

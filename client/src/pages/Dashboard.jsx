@@ -19,15 +19,18 @@ import {
   Brightness4,
   Brightness7,
   Menu,
-  Inventory,
-  ShoppingCart,
-  People,
-  Category,
-  Store,
+  AccountCircle,
+  AccountBalance,
+  CreditCardOff,
+  AttachMoney,
+  ReceiptLong,
+  Notifications,
+  TransferWithinAStation,
 } from "@mui/icons-material";
 import { Link, Routes, Route } from "react-router-dom";
+import CreateAccount from "../components/Accounts/CreateAccount";
 
-const drawerWidth = 150;
+const drawerWidth = 240; // Increased width for better spacing
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -41,8 +44,14 @@ const Dashboard = () => {
         main: darkMode ? "#90caf9" : "#1976d2",
       },
       background: {
-        default: darkMode ? "#121212" : "#f4f6f8",
+        default: darkMode ? "#121212" : "#ffffff", // Set the background to white
       },
+      success: {
+        main: "#4caf50", // Define success color (green)
+      },
+    },
+    typography: {
+      fontFamily: "'Roboto', sans-serif",
     },
   });
 
@@ -62,6 +71,50 @@ const Dashboard = () => {
         </Typography>
       </Toolbar>
       <Divider />
+      <List>
+        <ListItem button component={Link} to="/create-account">
+          <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
+            <AccountCircle />
+          </ListItemIcon>
+          <ListItemText primary="Accounts" sx={{ color: theme.palette.success.main }} />
+        </ListItem>
+        <ListItem button component={Link} to="/transaction">
+          <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
+            <AccountBalance />
+          </ListItemIcon>
+          <ListItemText primary="Transaction" sx={{ color: theme.palette.success.main }} />
+        </ListItem>
+        <ListItem button component={Link} to="/transfer">
+          <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
+            <TransferWithinAStation />
+          </ListItemIcon>
+          <ListItemText primary="Transfer" sx={{ color: theme.palette.success.main }} />
+        </ListItem>
+        <ListItem button component={Link} to="/loan">
+          <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
+            <AttachMoney />
+          </ListItemIcon>
+          <ListItemText primary="Loan" sx={{ color: theme.palette.success.main }} />
+        </ListItem>
+        <ListItem button component={Link} to="/card">
+          <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
+            <CreditCardOff />
+          </ListItemIcon>
+          <ListItemText primary="Card" sx={{ color: theme.palette.success.main }} />
+        </ListItem>
+        <ListItem button component={Link} to="/bill-payment">
+          <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
+            <ReceiptLong />
+          </ListItemIcon>
+          <ListItemText primary="Bill Payment" sx={{ color: theme.palette.success.main }} />
+        </ListItem>
+        <ListItem button component={Link} to="/notifications">
+          <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
+            <Notifications />
+          </ListItemIcon>
+          <ListItemText primary="Notification" sx={{ color: theme.palette.success.main }} />
+        </ListItem>
+      </List>
     </div>
   );
 
@@ -72,11 +125,10 @@ const Dashboard = () => {
         <AppBar
           position="fixed"
           sx={{
-            width: sidebarOpen
-              ? { sm: `calc(100% - ${drawerWidth}px)` }
-              : "100%",
+            width: sidebarOpen ? { sm: `calc(100% - ${drawerWidth}px)` } : "100%",
             ml: sidebarOpen ? { sm: `${drawerWidth}px` } : "0",
-            backgroundColor: darkMode ? "#333" : "#1976d2",
+            backgroundColor: theme.palette.success.main,
+            boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
           }}
         >
           <Toolbar>
@@ -89,12 +141,7 @@ const Dashboard = () => {
             >
               <Menu />
             </IconButton>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1 }}
-            >
+            <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
               Bank Dashboard
             </Typography>
             <IconButton color="inherit" onClick={handleThemeToggle}>
@@ -123,6 +170,7 @@ const Dashboard = () => {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
+                backgroundColor: darkMode ? "#333" : "#ffffff", // Updated background to white
               },
             }}
           >
@@ -135,7 +183,8 @@ const Dashboard = () => {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                backgroundColor: darkMode ? "#333" : "#f4f6f8",
+                backgroundColor: darkMode ? "#333" : "#ffffff", // Updated background to white
+                borderRight: darkMode ? "1px solid #444" : "1px solid #ddd",
               },
             }}
             open={sidebarOpen}
@@ -150,11 +199,13 @@ const Dashboard = () => {
             flexGrow: 1,
             p: 3,
             width: `calc(100% - ${drawerWidth}px)`,
-            backgroundColor: darkMode ? "#181818" : "#f4f6f8",
+            backgroundColor: darkMode ? "#181818" : "#ffffff", // Set to white background
           }}
         >
           <Toolbar />
-
+          <Routes>
+            <Route path="/create-account" element={<CreateAccount />} />
+          </Routes>
         </Box>
       </Box>
     </ThemeProvider>
