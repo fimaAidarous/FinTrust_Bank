@@ -12,3 +12,12 @@ export const createTransaction = async (req,res, next) => {
         next(error);
     }
 };
+
+export const getAllTransactions = async (req, res, next) => {
+    try {
+        const transactions = await Transaction.find().populate("account_id", "account_number");
+        res.status(200).json(transactions);
+    } catch (error) {
+        next(error);
+    }
+};
