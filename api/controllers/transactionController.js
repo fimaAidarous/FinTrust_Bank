@@ -45,3 +45,13 @@ export const updateTransaction = async (req, res, next) => {
         next(error);
     }
 };
+
+export const deleteTransaction = async (req, res, next) => {
+    try {
+        const deletedTransaction = await Transaction.findByIdAndDelete(req.params.id);
+        if (!deletedTransaction) return next(errorHandler(404, "Transaction not found!"));
+        res.status(200).json("Transaction deleted successfully!");
+    } catch (error) {
+        next(error);
+    }
+};
