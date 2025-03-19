@@ -21,3 +21,13 @@ export const getAllTransactions = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getTransaction = async (req, res, next) => {
+    try {
+        const transaction = await Transaction.findById(req.params.id).populate("account_id", "account_number");
+        if (!transaction) return next(errorHandler(404, "Transaction not found!"));
+        res.status(200).json(transaction);
+    } catch (error) {
+        next(error);
+    }
+};
