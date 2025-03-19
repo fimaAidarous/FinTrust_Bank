@@ -31,3 +31,17 @@ export const getTransaction = async (req, res, next) => {
         next(error);
     }
 };
+
+export const updateTransaction = async (req, res, next) => {
+    try {
+        const updatedTransaction = await Transaction.findByIdAndUpdate(
+            req.params.id,
+            { $set: req.body },
+            { new: true }
+        );
+        if (!updatedTransaction) return next(errorHandler(404, "Transaction not found!"));
+        res.status(200).json({ message: "Transaction updated successfully!", updatedTransaction });
+    } catch (error) {
+        next(error);
+    }
+};
