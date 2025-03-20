@@ -29,8 +29,9 @@ import {
 } from "@mui/icons-material";
 import { Link, Routes, Route } from "react-router-dom";
 import CreateAccount from "../components/Accounts/CreateAccount";
+import CreateTransaction from "../components/Transactions/CreateTransaction";
 
-const drawerWidth = 240; // Increased width for better spacing
+const drawerWidth = 240; 
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -44,10 +45,10 @@ const Dashboard = () => {
         main: darkMode ? "#90caf9" : "#1976d2",
       },
       background: {
-        default: darkMode ? "#121212" : "#ffffff", // Set the background to white
+        default: darkMode ? "#121212" : "#ffffff", 
       },
       success: {
-        main: "#4caf50", // Define success color (green)
+        main: "#4caf50", 
       },
     },
     typography: {
@@ -78,7 +79,7 @@ const Dashboard = () => {
           </ListItemIcon>
           <ListItemText primary="Accounts" sx={{ color: theme.palette.success.main }} />
         </ListItem>
-        <ListItem button component={Link} to="/transaction">
+        <ListItem button component={Link} to="/create-transaction">
           <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
             <AccountBalance />
           </ListItemIcon>
@@ -170,7 +171,7 @@ const Dashboard = () => {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                backgroundColor: darkMode ? "#333" : "#ffffff", // Updated background to white
+                backgroundColor: darkMode ? "#333" : "#ffffff", 
               },
             }}
           >
@@ -183,7 +184,7 @@ const Dashboard = () => {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                backgroundColor: darkMode ? "#333" : "#ffffff", // Updated background to white
+                backgroundColor: darkMode ? "#333" : "#ffffff", 
                 borderRight: darkMode ? "1px solid #444" : "1px solid #ddd",
               },
             }}
@@ -199,12 +200,13 @@ const Dashboard = () => {
             flexGrow: 1,
             p: 3,
             width: `calc(100% - ${drawerWidth}px)`,
-            backgroundColor: darkMode ? "#181818" : "#ffffff", // Set to white background
+            backgroundColor: darkMode ? "#181818" : "#ffffff",
           }}
         >
           <Toolbar />
           <Routes>
             <Route path="/create-account" element={<CreateAccount />} />
+            <Route path="/create-transaction" element={<CreateTransaction />} />
           </Routes>
         </Box>
       </Box>
