@@ -7,6 +7,7 @@ import userRouter from './routes/userRouter.js';
 import authRouter from './routes/authRoute.js';
 import accountRoute from './routes/accountRoute.js';
 import transactionRoute from './routes/transactionRoute.js';
+import transferRoute from './routes/transferRoute.js';
 
 dotenv.config();
 
@@ -36,10 +37,11 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/accounts', accountRoute);
 app.use('/api/transactions', transactionRoute);
+app.use('/api/transfers', transferRoute);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
-    const message = err.message || "internal Server Error";
+    const message = err.message || "Internal Server Error";
     return res.status(statusCode).json({
         success: false,
         statusCode,
