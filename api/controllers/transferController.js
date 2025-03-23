@@ -6,7 +6,6 @@ import { errorHandler } from "../utils/error.js";
 export const createTransfer = async (req, res, next) => {
     const { from_account, to_account, amount, currency } = req.body;
 
-    
     if (!mongoose.Types.ObjectId.isValid(from_account) || !mongoose.Types.ObjectId.isValid(to_account)) {
         return next(errorHandler(400, "Invalid account ID!"));
     }
@@ -38,7 +37,6 @@ export const createTransfer = async (req, res, next) => {
     }
 };
 
-
 export const getAllTransfers = async (req, res, next) => {
     try {
         const transfers = await Transfer.find()
@@ -53,7 +51,6 @@ export const getAllTransfers = async (req, res, next) => {
 export const deleteTransfer = async (req, res, next) => {
     const { id } = req.params;
 
-    
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return next(errorHandler(400, "Invalid transfer ID!"));
     }
@@ -63,6 +60,26 @@ export const deleteTransfer = async (req, res, next) => {
         if (!deletedTransfer) return next(errorHandler(404, "Transfer not found!"));
 
         res.status(200).json("Transfer deleted successfully!");
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getTransfer = async (req, res, next) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return next(errorHandler(400, "Invalid transfer ID!"));
+    }
+
+    try {
+        const transfer = await Transfer.findById(id)
+            .populate("from_account", "account_number")
+            .populate("to_account", "account_number");
+
+        if (!transfer) return next(errorHandler(404, "Transfer not found!"));
+
+        res.status(200).json(transfer);
     } catch (error) {
         next(error);
     }
