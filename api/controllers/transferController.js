@@ -37,3 +37,15 @@ export const createTransfer = async (req, res, next) => {
         next(error);
     }
 };
+
+
+export const getAllTransfers = async (req, res, next) => {
+    try {
+        const transfers = await Transfer.find()
+            .populate("from_account", "account_number")
+            .populate("to_account", "account_number");
+        res.status(200).json(transfers);
+    } catch (error) {
+        next(error);
+    }
+};
