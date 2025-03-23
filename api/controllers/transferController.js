@@ -49,3 +49,21 @@ export const getAllTransfers = async (req, res, next) => {
         next(error);
     }
 };
+
+export const deleteTransfer = async (req, res, next) => {
+    const { id } = req.params;
+
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return next(errorHandler(400, "Invalid transfer ID!"));
+    }
+
+    try {
+        const deletedTransfer = await Transfer.findByIdAndDelete(id);
+        if (!deletedTransfer) return next(errorHandler(404, "Transfer not found!"));
+
+        res.status(200).json("Transfer deleted successfully!");
+    } catch (error) {
+        next(error);
+    }
+};
