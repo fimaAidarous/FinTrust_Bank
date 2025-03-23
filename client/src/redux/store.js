@@ -2,6 +2,7 @@ import {  combineReducers, configureStore } from '@reduxjs/toolkit'
 import userReducer from './userSlice';
 import accountReducer from './accountSlice';
 import transactionReducer from './transactionSlice';
+import transferReducer from './transferSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     account: accountReducer,
     transaction: transactionReducer,
+    transfer:transferReducer,
 });
 
 const persistConfig = {
