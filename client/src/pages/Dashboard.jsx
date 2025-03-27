@@ -30,6 +30,7 @@ import {
 import { Link, Routes, Route } from "react-router-dom";
 import CreateAccount from "../components/Accounts/CreateAccount";
 import CreateTransaction from "../components/Transactions/CreateTransaction";
+import CreateTransfer from "../components/Transfer/CreateTransfer";
 
 const drawerWidth = 240; 
 
@@ -85,7 +86,7 @@ const Dashboard = () => {
           </ListItemIcon>
           <ListItemText primary="Transaction" sx={{ color: theme.palette.success.main }} />
         </ListItem>
-        <ListItem button component={Link} to="/transfer">
+        <ListItem button component={Link} to="/create-transfer">
           <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
             <TransferWithinAStation />
           </ListItemIcon>
@@ -207,6 +208,7 @@ const Dashboard = () => {
           <Routes>
             <Route path="/create-account" element={<CreateAccount />} />
             <Route path="/create-transaction" element={<CreateTransaction />} />
+            <Route path="/create-transfer" element={<CreateTransfer />} />
           </Routes>
         </Box>
       </Box>

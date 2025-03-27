@@ -23,24 +23,6 @@ const transferSlice = createSlice({
       state.loading = false;
     },
 
-    updateTransferStart: (state) => {
-      state.loading = true;
-    },
-    updateTransferSuccess: (state, action) => {
-      const index = state.transfers.findIndex(
-        (transfer) => transfer._id === action.payload._id
-      );
-      if (index !== -1) {
-        state.transfers[index] = action.payload;
-      }
-      state.loading = false;
-      state.error = null;
-    },
-    updateTransferFailure: (state, action) => {
-      state.error = action.payload;
-      state.loading = false;
-    },
-
     deleteTransferStart: (state) => {
       state.loading = true;
     },
@@ -106,9 +88,6 @@ export const {
   createTransferStart,
   createTransferSuccess,
   createTransferFailure,
-  updateTransferStart,
-  updateTransferSuccess,
-  updateTransferFailure,
   deleteTransferStart,
   deleteTransferSuccess,
   deleteTransferFailure,

@@ -11,10 +11,16 @@ import UpdateAccount from "./components/Accounts/UpdateAccount";
 import DeleteAccount from "./components/Accounts/DeleteAccount";
 
   // Transactions 
-  import CreateTransaction from "./components/Transactions/CreateTransaction";
-  import TransactionList from "./components/Transactions/TransactionList";
-  import UpdateTransaction from "./components/Transactions/UpdateTransaction";
-  import DeleteTransaction from "./components/Transactions/DeleteTransaction";
+import CreateTransaction from "./components/Transactions/CreateTransaction";
+import TransactionList from "./components/Transactions/TransactionList";
+import UpdateTransaction from "./components/Transactions/UpdateTransaction";
+import DeleteTransaction from "./components/Transactions/DeleteTransaction";
+
+
+  // Transfers
+import CreateTransfer from "./components/Transfer/CreateTransfer";
+import TransferList from "./components/Transfer/TransferList";
+import DeleteTransfer from "./components/Transfer/DeleteTransfer";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,6 +44,11 @@ export default function App() {
       <Route path="/transactions" element={<TransactionList />} />
       <Route path="/update-transaction/:transactionId" element={<UpdateTransaction />} />
       <Route path="/delete-transaction/:id" element={<DeleteTransaction />} /> 
+
+              {/* Transfers */}
+      <Route path="/create-transfer" element={<CreateTransfer />} />
+      <Route path="/transfers" element={<TransferList />} />
+      <Route path="/delete-transfer/:id" element={<DeleteTransfer />} /> 
 
       </Routes>
     </BrowserRouter>
