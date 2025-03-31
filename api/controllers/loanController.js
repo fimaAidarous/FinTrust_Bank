@@ -32,3 +32,15 @@ export const getAllLoans = async (req, res, next) => {
       next(error);
   }
 };
+
+export const getLoanById = async (req, res, next) => {
+  try {
+      const loan = await Loan.findById(req.params.id);
+      if (!loan) {
+          return next({ status: 404, message: "Loan not found" });
+      }
+      res.status(200).json(loan);
+  } catch (error) {
+      next(error);
+  }
+};
