@@ -24,3 +24,11 @@ export const createLoan = async (req,res, next) => {
     }
 };
 
+export const getAllLoans = async (req, res, next) => {
+  try {
+      const loans = await Loan.find();
+      res.status(200).json(loans);
+  } catch (error) {
+      next(error);
+  }
+};
