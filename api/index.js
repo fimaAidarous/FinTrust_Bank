@@ -8,6 +8,7 @@ import authRouter from './routes/authRoute.js';
 import accountRoute from './routes/accountRoute.js';
 import transactionRoute from './routes/transactionRoute.js';
 import transferRoute from './routes/transferRoute.js';
+import loanRoutes from './routes/loanRoutes.js';
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/accounts', accountRoute);
 app.use('/api/transactions', transactionRoute);
 app.use('/api/transfers', transferRoute);
+app.use('/api/Loans', loanRoutes);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

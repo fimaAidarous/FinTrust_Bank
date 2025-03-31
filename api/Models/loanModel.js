@@ -16,10 +16,6 @@ const loanSchema = new mongoose.Schema(
       enum: ["personal", "business"],
       required: true,
     },
-    interest_rate: {
-      type: Number,
-      required: true,
-    },
     status: {
       type: String,
       enum: ["pending", "approved", "rejected", "paid"],
