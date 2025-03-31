@@ -44,3 +44,22 @@ export const getLoanById = async (req, res, next) => {
       next(error);
   }
 };
+
+export const updateLoan = async (req, res, next) => {
+  try {
+      const updatedLoan = await Loan.findByIdAndUpdate(
+          req.params.id, 
+          req.body, 
+          { new: true, runValidators: true }
+      );
+      if (!updatedLoan) {
+          return next({ status: 404, message: "Loan not found" });
+      }
+      res.status(200).json({
+          message: "Loan updated successfully",
+          loan: updatedLoan
+      });
+  } catch (error) {
+      next(error);
+  }
+};
