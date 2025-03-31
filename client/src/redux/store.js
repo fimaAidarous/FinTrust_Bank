@@ -3,6 +3,7 @@ import userReducer from './userSlice';
 import accountReducer from './accountSlice';
 import transactionReducer from './transactionSlice';
 import transferReducer from './transferSlice';
+import loanReducer from './LoanSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     account: accountReducer,
     transaction: transactionReducer,
     transfer:transferReducer,
+    loan:loanReducer,
 });
 
 const persistConfig = {

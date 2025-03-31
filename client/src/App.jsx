@@ -22,6 +22,14 @@ import CreateTransfer from "./components/Transfer/CreateTransfer";
 import TransferList from "./components/Transfer/TransferList";
 import DeleteTransfer from "./components/Transfer/DeleteTransfer";
 
+
+  // Loans 
+import CreateLoan from "./components/Loans/CreateLoan";
+import LoanList from "./components/Loans/LoanList";
+import UpdateLoan from "./components/Loans/UpdateLoan";
+import DeleteLoan from "./components/Loans/DeleteLoan";
+
+
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -49,6 +57,12 @@ export default function App() {
       <Route path="/create-transfer" element={<CreateTransfer />} />
       <Route path="/transfers" element={<TransferList />} />
       <Route path="/delete-transfer/:id" element={<DeleteTransfer />} /> 
+
+                    {/* Loans */}
+      <Route path="/create-loan" element={<CreateLoan />} />
+      <Route path="/Loans" element={<LoanList />} />
+      <Route path="/update-loan/:loanId" element={<UpdateLoan />} />
+      <Route path="/delete-loan/:id" element={<DeleteLoan />} /> 
 
       </Routes>
     </BrowserRouter>
