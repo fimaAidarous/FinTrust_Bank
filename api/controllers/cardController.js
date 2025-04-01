@@ -53,3 +53,22 @@ export const getCardById = async (req, res, next) => {
         next(error);
     }
 };
+
+export const updateCard = async (req, res, next) => {
+    try {
+        const updatedCard = await Card.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!updatedCard) {
+            return next({ status: 404, message: "Card not found" });
+        }
+        res.status(200).json({
+            message: "Card updated successfully",
+            card: updatedCard
+        });
+    } catch (error) {
+        next(error);
+    }
+};
