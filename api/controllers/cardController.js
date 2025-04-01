@@ -41,3 +41,15 @@ export const getAllCards = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getCardById = async (req, res, next) => {
+    try {
+        const card = await Card.findById(req.params.id).populate("user_id", "name email");
+        if (!card) {
+            return next({ status: 404, message: "Card not found" });
+        }
+        res.status(200).json(card);
+    } catch (error) {
+        next(error);
+    }
+};
