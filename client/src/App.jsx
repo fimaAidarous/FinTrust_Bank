@@ -29,6 +29,11 @@ import LoanList from "./components/Loans/LoanList";
 import UpdateLoan from "./components/Loans/UpdateLoan";
 import DeleteLoan from "./components/Loans/DeleteLoan";
 
+  // Cards 
+import CreateCard from "./components/Cards/CreateCard";
+import CardList from "./components/Cards/CardList";
+import UpdateCard from "./components/Cards/UpdateCard";
+import DeleteCard from "./components/Cards/DeleteCard";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,11 +63,17 @@ export default function App() {
       <Route path="/transfers" element={<TransferList />} />
       <Route path="/delete-transfer/:id" element={<DeleteTransfer />} /> 
 
-                    {/* Loans */}
+              {/* Loans */}
       <Route path="/create-loan" element={<CreateLoan />} />
       <Route path="/Loans" element={<LoanList />} />
       <Route path="/update-loan/:loanId" element={<UpdateLoan />} />
       <Route path="/delete-loan/:id" element={<DeleteLoan />} /> 
+
+              {/* Cards */}
+      <Route path="/create-card" element={<CreateCard />} />
+      <Route path="/Cards" element={<CardList />} />
+      <Route path="/update-card/:cardId" element={<UpdateCard />} />
+      <Route path="/delete-card/:id" element={<DeleteCard />} /> 
 
       </Routes>
     </BrowserRouter>

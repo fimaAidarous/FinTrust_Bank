@@ -32,6 +32,7 @@ import CreateAccount from "../components/Accounts/CreateAccount";
 import CreateTransaction from "../components/Transactions/CreateTransaction";
 import CreateTransfer from "../components/Transfer/CreateTransfer";
 import CreateLoan from "../components/Loans/CreateLoan";
+import CreateCard from "../components/Cards/CreateCard";
 
 const drawerWidth = 240; 
 
@@ -99,7 +100,7 @@ const Dashboard = () => {
           </ListItemIcon>
           <ListItemText primary="Loan" sx={{ color: theme.palette.success.main }} />
         </ListItem>
-        <ListItem button component={Link} to="/card">
+        <ListItem button component={Link} to="/create-card">
           <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
             <CreditCardOff />
           </ListItemIcon>
@@ -211,6 +212,7 @@ const Dashboard = () => {
             <Route path="/create-transaction" element={<CreateTransaction />} />
             <Route path="/create-transfer" element={<CreateTransfer />} />
             <Route path="/create-loan" element={<CreateLoan />} />
+            <Route path="/create-card" element={<CreateCard />} />
           </Routes>
         </Box>
       </Box>
