@@ -61,3 +61,15 @@ export const updateBillPayment = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getBillPaymentById = async (req, res, next) => {
+    try {
+        const billPayment = await BillPayment.findById(req.params.id).populate("user_id", "name email").populate("account_id", "account_name");
+        if (!billPayment) {
+            return next({ status: 404, message: "Bill payment not found" });
+        }
+        res.status(200).json(billPayment);
+    } catch (error) {
+        next(error);
+    }
+};
