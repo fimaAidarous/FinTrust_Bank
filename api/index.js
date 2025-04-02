@@ -10,6 +10,7 @@ import transactionRoute from './routes/transactionRoute.js';
 import transferRoute from './routes/transferRoute.js';
 import loanRoutes from './routes/loanRoutes.js';
 import cardRoutes from './routes/cardRoutes.js';
+import BillPaymentRoute from './routes/BillPaymentRoute.js';
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.use('/api/transactions', transactionRoute);
 app.use('/api/transfers', transferRoute);
 app.use('/api/Loans', loanRoutes);
 app.use('/api/Cards', cardRoutes);
+app.use('/api/BillPayments', BillPaymentRoute);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
