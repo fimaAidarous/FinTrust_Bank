@@ -42,3 +42,22 @@ export const getAllBillPayments = async (req, res, next) => {
         next(error);
     }
 };
+
+export const updateBillPayment = async (req, res, next) => {
+    try {
+        const updatedBillPayment = await BillPayment.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!updatedBillPayment) {
+            return next({ status: 404, message: "Bill payment not found" });
+        }
+        res.status(200).json({
+            message: "Bill payment updated successfully",
+            billPayment: updatedBillPayment
+        });
+    } catch (error) {
+        next(error);
+    }
+};
