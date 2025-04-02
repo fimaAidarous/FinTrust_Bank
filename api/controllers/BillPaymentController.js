@@ -73,3 +73,15 @@ export const getBillPaymentById = async (req, res, next) => {
         next(error);
     }
 };
+
+export const deleteBillPayment = async (req, res, next) => {
+    try {
+        const billPayment = await BillPayment.findByIdAndDelete(req.params.id);
+        if (!billPayment) {
+            return next({ status: 404, message: "Bill payment not found" });
+        }
+        res.status(200).json({ message: "Bill payment deleted successfully" });
+    } catch (error) {
+        next(error);
+    }
+};
