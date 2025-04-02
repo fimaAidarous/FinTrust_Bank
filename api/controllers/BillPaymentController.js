@@ -30,3 +30,15 @@ export const createBillPayment = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getAllBillPayments = async (req, res, next) => {
+    try {
+        const billPayments = await BillPayment.find().populate("user_id", "name email").populate("account_id", "account_name");
+        if (billPayments.length === 0) {
+            return res.status(404).json({ message: "No bill payments found" });
+        }
+        res.status(200).json(billPayments);
+    } catch (error) {
+        next(error);
+    }
+};
