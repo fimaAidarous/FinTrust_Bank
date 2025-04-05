@@ -35,6 +35,12 @@ import CardList from "./components/Cards/CardList";
 import UpdateCard from "./components/Cards/UpdateCard";
 import DeleteCard from "./components/Cards/DeleteCard";
 
+  // BillPayments 
+import CreateBillPayment from "./components/BillPayments/CreateBillPayment";
+import BillPaymentList from "./components/BillPayments/BillPaymentList";
+import UpdateBillPayment from "./components/BillPayments/UpdateBillPayment";
+import DeleteBillPayment from "./components/BillPayments/DeleteBillPayment";
+
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -75,6 +81,11 @@ export default function App() {
       <Route path="/update-card/:cardId" element={<UpdateCard />} />
       <Route path="/delete-card/:id" element={<DeleteCard />} /> 
 
+              {/* BillPayment */}
+      <Route path="/create-billPayment" element={<CreateBillPayment />} />
+      <Route path="/BillPayments" element={<BillPaymentList />} />
+      <Route path="/update-billPayment/:billPaymentId" element={<UpdateBillPayment />} />
+      <Route path="/delete-billPayment/:id" element={<DeleteBillPayment />} /> 
       </Routes>
     </BrowserRouter>
   );

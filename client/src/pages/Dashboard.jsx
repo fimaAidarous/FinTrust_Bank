@@ -33,6 +33,7 @@ import CreateTransaction from "../components/Transactions/CreateTransaction";
 import CreateTransfer from "../components/Transfer/CreateTransfer";
 import CreateLoan from "../components/Loans/CreateLoan";
 import CreateCard from "../components/Cards/CreateCard";
+import CreateBillPayment from "../components/BillPayments/CreateBillPayment";
 
 const drawerWidth = 240; 
 
@@ -106,17 +107,11 @@ const Dashboard = () => {
           </ListItemIcon>
           <ListItemText primary="Card" sx={{ color: theme.palette.success.main }} />
         </ListItem>
-        <ListItem button component={Link} to="/bill-payment">
+        <ListItem button component={Link} to="/create-billPayment">
           <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
             <ReceiptLong />
           </ListItemIcon>
           <ListItemText primary="Bill Payment" sx={{ color: theme.palette.success.main }} />
-        </ListItem>
-        <ListItem button component={Link} to="/notifications">
-          <ListItemIcon sx={{ minWidth: "40px", color: theme.palette.success.main }}>
-            <Notifications />
-          </ListItemIcon>
-          <ListItemText primary="Notification" sx={{ color: theme.palette.success.main }} />
         </ListItem>
       </List>
     </div>
@@ -213,6 +208,7 @@ const Dashboard = () => {
             <Route path="/create-transfer" element={<CreateTransfer />} />
             <Route path="/create-loan" element={<CreateLoan />} />
             <Route path="/create-card" element={<CreateCard />} />
+            <Route path="/create-billPayment" element={<CreateBillPayment />} />
           </Routes>
         </Box>
       </Box>
